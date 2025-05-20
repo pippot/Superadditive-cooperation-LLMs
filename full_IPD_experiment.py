@@ -25,7 +25,7 @@ results = {}
 
 
 for condition in CONDITIONS:
-    file_paths = run_full_experiment(condition=condition, replications=5, model="mistral-small")
+    file_paths = run_full_experiment(condition=condition, replications=5, model="qwen3")
     #file_paths = glob.glob(f"plots/**/results_{condition}_*_qwen3.json", recursive=True)
 
     all_final_states = []

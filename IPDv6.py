@@ -363,12 +363,13 @@ def format_player_history(player_id: int, tournament_state: TournamentState, cur
     history = []
     for match in tournament_state.matches.values():
         if player_id == match.player1_id or player_id == match.player2_id:
-            if current_tournament_condition == "repeated_only":
-                history.append(f"\nResults of match between player {match.player1_id} and player {match.player2_id}:")
-            else:
-                history.append(
-                    f"\nResults of match between player {match.player1_id} from group {match.player1_stats.group_id} and player {match.player2_id} from group {match.player2_stats.group_id}:")
-            history.append(format_match_results(match, player_id))
+            match_res = format_match_results(match, player_id)
+            if match_res != "No rounds played yet":
+                if current_tournament_condition == "repeated_only":
+                    history.append(f"\nResults of match between player {match.player1_id} and player {match.player2_id}:")
+                else:
+                    history.append(f"\nResults of match between player {match.player1_id} from group {match.player1_stats.group_id} and player {match.player2_id} from group {match.player2_stats.group_id}:")
+                history.append(match_res)
 
     return "\n".join(history) if history else "No rounds played yet"
 
@@ -666,7 +667,7 @@ def run_meta_prompt(player_id: int, state: MatchState, opponent_id: int, tournam
         forgiving = False
 
     # Evaluate answers to the meta prompt
-    min_max_score = int(min_max == (0, 5))
+    min_max_score = int(min_max == (-1, 5))
     if actions == ['action_a', 'action_b'] or actions == ['action_b', 'action_a'] or actions == ['action a',
                                                                                                  'action b'] or actions == [
         'action b', 'action a']:
