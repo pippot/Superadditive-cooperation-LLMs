@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Super-additive Cooperation in Language Model Agents - Filippo Tonini, Lukas Galke">
+  <meta name="description" content="This study shows that combining repeated interactions and inter-group competition in LLM agents interactions amplify cooperative behavior.">
+  <meta name="keywords" content="Super-additive cooperation, Large language models, Prisoner’s dilemma, Multi-agent cooperation, AI agents, Alignment">
+  <meta name="author" content="Filippo Tonini, Lukas Galke">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="University of Southern Denmark">
+  <meta property="og:title" content="Super-additive Cooperation in Language Model Agents">
+  <meta property="og:description" content="This study shows that combining repeated interactions and inter-group competition in LLM agents interactions amplify cooperative behavior.">
+  <!-- TODO: Replace with your actual website URL -->
+  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="PAPER_TITLE - Research Preview">
+  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:author" content="FIRST_AUTHOR_NAME">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="KEYWORD1">
+  <meta property="article:tag" content="KEYWORD2">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- TODO: Replace with your lab/institution Twitter handle -->
+  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
+  <!-- TODO: Replace with first author's Twitter handle -->
+  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
+  <!-- TODO: Same as paper title above -->
+  <meta name="twitter:title" content="PAPER_TITLE">
+  <!-- TODO: Same as description above -->
+  <meta name="twitter:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
+  <!-- TODO: Same as social preview image above -->
+  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="PAPER_TITLE - Research Preview">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="PAPER_TITLE">
+  <meta name="citation_author" content="FIRST_AUTHOR_LAST, FIRST_AUTHOR_FIRST">
+  <meta name="citation_author" content="SECOND_AUTHOR_LAST, SECOND_AUTHOR_FIRST">
+  <meta name="citation_publication_date" content="2024">
+  <meta name="citation_conference_title" content="CONFERENCE_NAME">
+  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <title>Super-additive Cooperation in Language Model Agents - Filippo Tonini, Lukas Galke | Academic Research</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "PAPER_TITLE",
+    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "FIRST_AUTHOR_NAME",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "INSTITUTION_NAME"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "SECOND_AUTHOR_NAME",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "INSTITUTION_NAME"
+        }
+      }
+    ],
+    "datePublished": "2024-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "CONFERENCE_OR_JOURNAL_NAME"
+    },
+    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
+    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
+    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
+    "abstract": "FULL_ABSTRACT_TEXT_HERE",
+    "citation": "BIBTEX_CITATION_HERE",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "RESEARCH_AREA_1"
+      },
+      {
+        "@type": "Thing", 
+        "name": "RESEARCH_AREA_2"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "INSTITUTION_OR_LAB_NAME",
+    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
+    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
+    "sameAs": [
+      "https://twitter.com/YOUR_TWITTER_HANDLE",
+      "https://github.com/YOUR_GITHUB_USERNAME"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Super-additive Cooperation in Language Model Agents</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://arxiv.org/search/cs?searchtype=author&query=Tonini,+F" target="_blank">Filippo Tonini</a><sup>*</sup>,</span>
+                <span class="author-block">
+                  <a href="https://lgalke.github.io/" target="_blank">Lukas Galke</a><sup>*</sup>,</span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block">University of Southern Denmark<br>FAIEMA 2025</span>
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/2508.15510.pdf" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                  <span class="link-block">
+                    <a href="https://github.com/pippot/Superadditive-cooperation-LLMs" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2508.15510" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            With the prospect of autonomous artificial intelligence (AI) agents, studying their tendency for cooperative behavior becomes an increasingly relevant topic. This study is inspired by the super-additive cooperation theory, where the combined effects of repeated interactions and inter-group rivalry have been argued to be the cause for cooperative tendencies found in humans. We devised a virtual tournament where language model agents, grouped into teams, face each other in a Prisoner's Dilemma game. By simulating both internal team dynamics and external competition, we discovered that this blend substantially boosts both overall and initial, one-shot cooperation levels (the tendency to cooperate in one-off interactions). This research provides a novel framework for large language models to strategize and act in complex social scenarios and offers evidence for how intergroup competition can, counter-intuitively, result in more cooperative behavior. These insights are crucial for designing future multi-agent AI systems that can effectively work together and better align with human values.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Introduction Section -->
+<section class="section hero is-white">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
+          <p>
+            With the rapid rise in the popularity of large language model agents and the growing potential for autonomous AI systems, it is increasingly important to understand how these models behave in social contexts. Furthermore, as LLM-driven agents begin to interact autonomously with each other, understanding the dynamics of their cooperative behaviors becomes essential for ensuring alignment with human values, and preventing adversarial dynamics. Game theory offers a powerful and simplified framework to study such interactions, capturing essential elements of real-world dynamics.
+          </p>
+          <p>
+            This study investigates the cooperation dynamics among LLM agents, focusing on how cooperation emerges or deteriorates in different scenarios. We explore the behavior of LLMs in a large scale Iterated Prisoner's Dilemma tournament, with different interaction networks inspired by <strong>super-additive cooperation theory</strong>. While LLMs are typically cooperative by default, owing to their training on curated human-aligned datasets, this behavior may shift in competitive environments.
+          </p>
+          <p>
+            Super-additive cooperation refers to the synergistic effect that arises when repeated interactions are combined with inter-group competition. On their own, neither mechanism consistently sustains cooperative behavior; however, their combination fosters robust cooperation inside groups, even in first interactions. This provides a solid explanation for one-shot cooperation (OSC) in humans. This study is the first to systematically investigate super-additive effects in LLM populations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Hypotheses Section -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Hypotheses</h2>
+        <div class="content">
+          <p>
+            We formulated two main hypotheses regarding the effects of repeated interactions (RI), group competition (GC), and their super-additive (SA) combination on LLM agent cooperation:
+          </p>
+          <div class="hypotheses-math">
+            <strong>H<sub>1</sub>:</strong> &mu;<sub>c</sub><sup>sa</sup> &gt; max(&mu;<sub>c</sub><sup>ri</sup>, &mu;<sub>c</sub><sup>gc</sup>)
+          </div>
+          <p>
+            The average cooperation rate (&mu;<sub>c</sub>) under the combined (super-additive) condition exceeds that under either mechanism alone.
+          </p>
+          <div class="hypotheses-math">
+            <strong>H<sub>2</sub>:</strong> &mu;<sub>osc</sub><sup>sa</sup> &gt; max(&mu;<sub>osc</sub><sup>ri</sup>, &mu;<sub>osc</sub><sup>gc</sup>)
+          </div>
+          <p>
+            The average one-shot cooperation rate (&mu;<sub>osc</sub>) under the combined (super-additive) condition exceeds that under either mechanism alone.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Methods Section -->
+<section class="section hero is-white">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Methods & Experimental Design</h2>
+        <div class="content has-text-justified">
+            <h3>Iterated Prisoner's Dilemma (IPD)</h3>
+            <p>
+                Agents interact by playing a match of the IPD. Players can adjust their strategies over time based on past outcomes. The payoff matrix used is as follows:
+            </p>
+            <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Cooperate</th>
+                        <th>Defect</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cooperate</strong></td>
+                        <td>3, 3</td>
+                        <td>-1, 5</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Defect</strong></td>
+                        <td>5, -1</td>
+                        <td>0, 0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Language Model Agents</h3>
+            <p>
+                We focused on lightweight open-source LLMs: <code>Qwen3 14b</code>, <code>Phi4 reasoning</code>, and <code>Cogito 14b</code>. All agents in a given tournament were powered by the same model. A planning-evaluation loop was executed every K=5 rounds to refine strategy, allowing for long-term planning.
+            </p>
+
+            <h3>Tournament Structure and Conditions</h3>
+            <p>
+                Agents were placed in three different tournament structures (two teams of three players each):
+            </p>
+            <ul>
+                <li><strong>Repeated Interactions (RI):</strong> Every player engages against every other player. The goal is to maximize <strong>personal score</strong>.</li>
+                <li><strong>Group Competition (GC):</strong> Players are assigned to groups and play only against players not in their own group. The goal is to maximize <strong>group score</strong>.</li>
+                <li><strong>Super-additive (SA):</strong> Combines both. Players compete against all other players (within and outside their group). The goal is to maximize both <strong>group and personal score</strong>.</li>
+            </ul>
+
+            <h3>Prompting</h3>
+            <p>
+                To avoid introducing bias different prompting techniques were used, for example the terms "cooperate" and "defect" were deliberately excluded from the prompt. Instead, choices were referred to neutrally as <code>"action a"</code> and <code>"action b"</code>.
+            </p>
+
+            <h3>Evaluation Measures</h3>
+            <p>
+                We measured the <strong>Cooperation Rate (p<sub>c</sub>)</strong>, the frequency of cooperative actions, and the <strong>One-shot Cooperation (p<sub>osc</sub>)</strong>, the cooperation rate during the very first interaction with an unknown opponent.
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Results Section -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results</h2>
+        <div class="content has-text-justified">
+            <h3>Cooperation Rates (&mu;<sub>c</sub>)</h3>
+            <p>
+                The <code>Qwen 3</code> model exhibited predominantly uncooperative behavior in RI. <code>Phi 4</code> often showed a downward trend in cooperation, especially in RI. In the SA setting, its cooperation rates remained slightly higher. <code>Cogito</code> showed higher cooperation overall. As shown in the tables, the SA structure significantly boosted cooperation for both <code>Phi4</code> and <code>Qwen3</code>.
+            </p>
+            <div class="columns is-desktop">
+                <div class="column">
+                    <table class="table is-bordered is-fullwidth">
+                        <caption><strong>Table 1:</strong> &mu;<sub>c</sub> for <code>Qwen3</code></caption>
+                        <thead><tr><th>Qwen</th><th>Mean</th><th>95% CI</th></tr></thead>
+                        <tbody>
+                            <tr><td>RI</td><td>0.22</td><td>[0.20, 0.23]</td></tr>
+                            <tr><td>GC</td><td>0.23</td><td>[0.20, 0.25]</td></tr>
+                            <tr><td><strong>SA</strong></td><td><strong>0.32</strong></td><td><strong>[0.29, 0.34]</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="column">
+                    <table class="table is-bordered is-fullwidth">
+                        <caption><strong>Table 2:</strong> &mu;<sub>c</sub> for <code>Phi4</code></caption>
+                        <thead><tr><th>Phi</th><th>Mean</th><th>95% CI</th></tr></thead>
+                        <tbody>
+                            <tr><td>RI</td><td>0.21</td><td>[0.18, 0.24]</td></tr>
+                            <tr><td>GC</td><td>0.13</td><td>[0.11, 0.16]</td></tr>
+                            <tr><td><strong>SA</strong></td><td><strong>0.43</strong></td><td><strong>[0.40, 0.46]</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="column">
+                    <table class="table is-bordered is-fullwidth">
+                        <caption><strong>Table 3:</strong> &mu;<sub>c</sub> for <code>Cogito</code></caption>
+                        <thead><tr><th>Cogito</th><th>Mean</th><th>95% CI</th></tr></thead>
+                        <tbody>
+                            <tr><td>RI</td><td>0.50</td><td>[0.48, 0.53]</td></tr>
+                            <tr><td><strong>GC</strong></td><td><strong>0.59</strong></td><td><strong>[0.56, 0.62]</strong></td></tr>
+                            <tr><td>SA</td><td>0.55</td><td>[0.52, 0.57]</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h3>One-shot Cooperation (&mu;<sub>osc</sub>)</h3>
+            <p>
+                In one-shot interactions, <code>Cogito</code> remained the most cooperative. Both <code>Phi4</code> and <code>Qwen3</code> showed lower values overall, but both reached their peak one-shot cooperation in the SA condition.
+            </p>
+            <div class="columns is-desktop">
+                <div class="column">
+                    <table class="table is-bordered is-fullwidth">
+                        <caption><strong>Table 4:</strong> &mu;<sub>osc</sub> for <code>Qwen3</code></caption>
+                        <thead><tr><th>Qwen</th><th>Mean</th><th>95% CI</th></tr></thead>
+                        <tbody>
+                            <tr><td>RI</td><td>0.27</td><td>[0.20, 0.34]</td></tr>
+                            <tr><td>GC</td><td>0.26</td><td>[0.16, 0.35]</td></tr>
+                            <tr><td><strong>SA</strong></td><td><strong>0.39</strong></td><td><strong>[0.31, 0.47]</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="column">
+                    <table class="table is-bordered is-fullwidth">
+                        <caption><strong>Table 5:</strong> &mu;<sub>osc</sub> for <code>Phi4</code></caption>
+                        <thead><tr><th>Phi</th><th>Mean</th><th>95% CI</th></tr></thead>
+                        <tbody>
+                            <tr><td>RI</td><td>0.29</td><td>[0.22, 0.37]</td></tr>
+                            <tr><td>GC</td><td>0.29</td><td>[0.19, 0.38]</td></tr>
+                            <tr><td><strong>SA</strong></td><td><strong>0.43</strong></td><td><strong>[0.35, 0.51]</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="column">
+                    <table class="table is-bordered is-fullwidth">
+                        <caption><strong>Table 6:</strong> &mu;<sub>osc</sub> for <code>Cogito</code></caption>
+                        <thead><tr><th>Cogito</th><th>Mean</th><th>95% CI</th></tr></thead>
+                        <tbody>
+                            <tr><td>RI</td><td>0.61</td><td>[0.53, 0.69]</td></tr>
+                            <tr><td><strong>GC</strong></td><td><strong>0.71</strong></td><td><strong>[0.62, 0.81]</strong></td></tr>
+                            <tr><td>SA</td><td>0.65</td><td>[0.58, 0.73]</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h3>Intra-group vs. Inter-group Cooperation</h3>
+            <p>
+                Intra-group cooperation rates were higher, and this was especially pronounced in <code>Phi4</code>. <code>Cogito</code>, despite its high overall cooperation, showed the lowest difference between intra-group and inter-group cooperation.
+            </p>
+
+            <h3>Results of Meta Prompting</h3>
+            <p>
+                Meta-prompt questions served as an indicator of game understanding. <code>Phi4</code> achieved the highest overall scores, followed closely by <code>Qwen3</code>. <code>Cogito</code> exhibited lower performance, suggesting it lacks a sufficient understanding of the game dynamics.
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Discussion Section -->
+<section class="section hero is-white">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Discussion</h2>
+        <div class="content has-text-justified">
+          <p>
+            Our results provide partial support for our hypotheses.
+          </p>
+          <p>
+            For <strong>H<sub>1</sub></strong> (Overall Cooperation), the results for <code>Qwen3</code> (SA: 0.32 vs RI: 0.22, GC: 0.23) and <code>Phi4</code> (SA: 0.43 vs RI: 0.21, GC: 0.13) fully align with this hypothesis. This effect was particularly pronounced in intra-group cooperation rates. The elevated cooperation in the SA condition is primarily due to intra-group interactions. This aligns with the theory that introducing an external enemy (group competition) increases pressure for intra-group cooperation.
+          </p>
+          <p>
+            For <strong>H<sub>2</sub></strong> (One-Shot Cooperation), <code>Qwen3</code> and <code>Phi4</code> exhibit the highest &mu;<sub>osc</sub> in the SA condition, lending support to the hypothesis that super-additive structures can promote initial cooperative behavior, even when agents lack prior knowledge of their opponent’s group.
+          </p>
+          <p>
+            <strong>Model Differences:</strong> <code>Cogito</code> did not consistently choose a more cooperative strategy in the SA setting and its meta-prompt scores were weaker. This suggests its behavior may be driven more by inherent model biases than by deliberate strategic reasoning.
+          </p>
+          <p>
+            It is noteworthy that some language models (<code>Phi4</code> and <code>Qwen3</code>) exhibit behavioral patterns similar to those observed in humans, specifically high intra-group cooperation in the combined super-additive setting.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Limitations Section -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Limitations</h2>
+        <div class="content has-text-justified">
+          <p>
+            While this study provides insights, several limitations should be acknowledged:
+          </p>
+          <ul>
+            <li><strong>Scale:</strong> Behaviors may differ in more powerful models or with more agents, teams, and rounds. Parameters like planning frequency and temperature require systematic testing.</li>
+            <li><strong>Generalizability:</strong> Findings from the iterated prisoner's dilemma may not extend to other games or real-world scenarios.</li>
+            <li><strong>Prompt Sensitivity:</strong> LLM behavior is sensitive to prompt phrasing, and the planner-evaluator-player framework was not extensively tested.</li>
+            <li><strong>Partner Choice:</strong> Complex group formation and partner selection mechanisms were not explored.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Conclusion Section -->
+<section class="section hero is-white">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Conclusion and Future Work</h2>
+        <div class="content has-text-justified">
+          <p>
+            In conclusion, this study demonstrates that structural factors like repeated interactions and inter-group competition significantly influence LLM agent cooperation. The super-additive condition, combining both, often fosters higher cooperation and one-shot cooperation rates, particularly for models like <code>Qwen3</code> and <code>Phi4</code> that demonstrate a clear understanding of the game dynamics.
+          </p>
+          <p>
+            The findings underscore the potential for designing interaction structures that promote cooperative outcomes, which is vital for aligning AI behavior with human values.
+          </p>
+          <p>
+            Future research could address these limitations by expanding the range of LLMs tested, exploring different game structures, increasing the scale of simulations, and investigating the impact of adaptive learning mechanisms. Additionally, incorporating richer social dynamics, such as communication between agents, autonomous team choice, or a reputation system, could provide deeper insights.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@misc{tonini2025superadditivecooperationlanguagemodel,
+      title={Super-additive Cooperation in Language Model Agents},
+      author={Filippo Tonini and Lukas Galke},
+      year={2025},
+      eprint={2508.15510},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2508.15510},
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
